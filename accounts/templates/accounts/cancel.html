@@ -1,0 +1,106 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/shopping.png'%}" alt="" width="40" height="24"
+                class="d-inline-block align-text-top">
+            OSP
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'buyer' %}">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+ 
+<div class="container">
+    <br>
+    <div class="row">
+    <h2>Payment Options</h2>
+     <div class="input-group mb-3">
+     
+                  <form method="post">
+                  {% csrf_token %}
+                  <label for="Amount">Amount</label>
+                  <input type="text" placeholder=" 0.00" name="Amount">
+                  <button  class="btn btn-outline-light" type="submit">Confirm Amount</button>
+                  </form>
+                 <a  class="btn btn-outline-light" href= "{% url 'payment' %}"> Make payment</a>
+                  
+        <div class="col-lg-12">
+            <div class="box-element">
+
+               
+
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th>
+                            <h5>Items: <strong>{{subscription.get_subscription_items}}</strong></h5>
+                        </th>
+                        <th>
+                            <h5>Total: <strong>{{subscription.get_subscription_total}}</strong></h5>
+                        </th>
+                        <div class="box-element hidden" id="payment-info">
+                
+                   
+                  <a  class="btn btn-success" id="make-payment" href= "{% url 'buyer' %}"> Make Payment</a>
+            </div> 
+                    </tr>
+                </table>
+
+            </div>
+
+            <br>
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2"><strong>Publication</strong></div>
+                    <div style="flex:1"><strong>Price</strong></div>
+                    <div style="flex:1"><strong>Quantity</strong></div>
+                    <div style="flex:1"><strong>Total</strong></div>
+                </div>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.publication.imageURL}}"></div>
+                    <div style="flex:2">
+                        <p>{{item.publication.paper_name}}</p>
+                    </div>
+                    <div style="flex:1">
+                        <p>{{item.publication.price}}</p>
+                    </div>
+                    <div style="flex:1">
+                        <p class="quantity">{{item.quantity}}</p>
+                        <div class="quantity">
+                            <img data-product={{item.publication.id}} data-action= "add" class="chg-quantity update-subscription" src="{% static 'images/arrow-up.png' %}">
+
+                            <img data-product={{item.publication.id}} data-action= "remove" class="chg-quantity update-subscription" src="{% static 'images/arrow-down.png' %}">
+                        </div>
+                    </div>
+                    <div style="flex:1">{{item.get_total}}</div>
+                </div>
+                
+                {% endfor %}
+                
+                
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content%}

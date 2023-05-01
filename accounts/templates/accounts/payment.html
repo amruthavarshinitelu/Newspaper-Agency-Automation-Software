@@ -1,0 +1,44 @@
+
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-blue bg-info fixed-top">
+    <div class="container-fluid">
+      <a class="btn btn-outline-dark navbar-brand" href="#">
+        
+        NAAS
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <a  class="btn btn-outline-dark" href= "{% url 'buyer' %}">Home</a>
+        <ul class="navbar-nav">
+          
+          <li class="nav-item">
+            <a class="nav-link disabled">Thank You, {{request.user}}</a>
+          </li>
+        </ul>
+      </div>
+    
+      <a  class="btn btn-outline-dark" href= "{% url 'cancel' %}"> Back</a>
+      
+    </div>
+  </nav>
+  
+<div class="image-container">
+<img src="{% static 'images/G.png'%}"  width="400" height="400">
+
+<div class="image-caption"> </div>
+<div class="image-caption"> Amount paid:{{x}}   * * * *     Amount due:{{y}}</div>
+</div>
+ 
+
+{% endblock content%}
