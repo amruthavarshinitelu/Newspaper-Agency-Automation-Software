@@ -1,0 +1,101 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+ 
+<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo2.png'%}" alt="" width="40" height="24"
+                class="d-inline-block align-text-top">
+            NAAS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a  class="btn btn-outline-dark" href= "{% url 'generate_bill' %}"> generate_bill</a>
+&nbsp;
+ <a class="btn btn-outline-dark btn-sm btn-info" href = "{% url 'addpublication' %}">Update</a>
+ &nbsp;
+  <a  class="btn btn-outline-dark" href= "{% url 'logout' %}"> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+   <div class="col-lg-6">
+    <div class="box-element">
+        
+        <hr>
+        <h4>Customers</h4>
+        <hr>
+        {% for customer in customers%}
+        <div class="cart-row">
+            <div style="flex:1">
+                <p>{{customer.name}}</p>
+            </div>
+            <div style="flex:1">
+                <p>{{customer.email}}</p>
+            </div>
+            <div style="flex:1">
+                <p>{{customer.phone}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    <div class="col-lg-6">
+        <div class="box-element">
+            <hr>
+            <h4>Delivery Agents</h4>
+            <hr>
+            {% for da in deliveryagent%}
+            <div class="cart-row">
+                <div style="flex:1">
+                    <p>{{da.name}}</p>
+                </div>
+                <div style="flex:1">
+                    <p>{{da.email}}</p>
+                </div>
+                <div style="flex:1">
+                    <p>{{da.phone}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    <div class="col-lg-6">
+        <div class="box-element">
+            <hr>
+            <h4>Publications</h4>
+            <hr>
+            {% for publication in publications%}
+            <div class="cart-row">
+                <div style="flex:1">
+                    <p>{{publication.paper_name}}</p>
+                </div>
+                
+                <div style="flex:1">
+                    <p>{{publication.price}}</p>
+                </div>
+               
+                
+               
+              
+            </div>
+            {% endfor %}
+            <form action="{% url 'redirect_to_admin' %}" method="post">{% csrf_token %}
+            <input type="submit" value="Change Database">
+            </form>
+        </div>
+    </div>
+</div>
+
+   {% endblock content%}

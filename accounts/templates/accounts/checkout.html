@@ -1,0 +1,66 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'images/logo2.png'%}" alt="" width="40" height="24"
+                class="d-inline-block align-text-top">
+            NAAS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'buyer' %}">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<br>
+<div class="bg-black"> 
+<div class="container" text-align="centre" >
+    
+            <div class="box-element hidden" id="payment-info">
+                <h5>Payment Options</h5>
+                {% comment %} <button id="make-payment" class="btn btn-success ">Make Payment</button> {% endcomment %}
+                <a  class="btn btn-success" id="make-payment" href= "{% url 'buyer' %}"> Make Payment</a>
+            </div>
+            
+            <button   class="btn btn-outline-dark" id="view-bill-btn" onclick="location.href='{% url 'cancel' %}'" {% if user.bill_option %}disabled{% endif %}>View Bill</button>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'subscription' %}">&#x2190; Back to Newspapers</a>
+                <hr>
+                <h4>Subscriptions Summary</h4>
+                <hr>
+                {% for item in items%}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.publication.imageURL}}"></div>
+                    <div style="flex:2">
+                        <p>{{item.publication.paper_name}}</p>
+                    </div>
+                    <div style="flex:1">
+                        <p>{{item.publication.price}}</p>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+                <h5>Items: {{subscription.get_subscription_items}} </h5>
+               
+            </div>
+        </div>
+    
+
+</div>
+
+</div>
+{% endblock content%}`
