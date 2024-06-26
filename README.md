@@ -1,5 +1,6 @@
 # Newspaper-Agency-Automation-Software
 Project of Newspaper Agency Automation Software using Django
+Below is a brief about project problem statement.CHeck out Software Requirement Specification(SRS) document for better understanding.
 # Problem Statement
 
 The local newspaper and magazine delivery agency has asked us to develop a software for him
